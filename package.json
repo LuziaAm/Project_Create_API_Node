@@ -1,0 +1,26 @@
+{
+  "name": "rest-api",
+  "version": "1.0.0",
+  "description": "Teste de REST API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuziaAm/Project_Create_API_Node.git"
+  },
+  "keywords": [
+    "Node",
+    "API"
+  ],
+  "author": "Luzia Amorim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LuziaAm/Project_Create_API_Node/issues"
+  },
+  "homepage": "https://github.com/LuziaAm/Project_Create_API_Node#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
