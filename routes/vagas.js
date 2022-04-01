@@ -12,8 +12,18 @@ router.get('/', (req, res, next) => {
 
 //INSERE UMA VAGA
 router.post('/', (req, res, next) => {
+    const vaga = {
+        titulo: req.body.titulo,
+        empresa: req.body.empresa,
+        nivel: req.body.nivel,
+        salario: req.body.salario,
+        descricao: req.body.descricao,
+        modalidade: req.body.modalidade,
+        tags:req.body.tags
+    }
     res.status(200).send({
-        mensagem: 'vaga inserida com sucesso!'
+        vagaCriada: vaga,
+        mensagem: 'vaga inserida com sucesso!'       
     });
 });
 
@@ -24,7 +34,7 @@ router.get('/:id_vaga',(req, res, next) =>{
 
     if (id === 'especial'){
         res.status(200).send({
-            //mensagem: 'Você esta usando o GET para uma vaga especial',
+            mensagem: 'Você esta usando o GET para uma vaga especial',
             id: id
         });
     }else{

@@ -12,8 +12,18 @@ router.get('/', (req, res, next) => {
 
 //INSERE UM CANDIDATO
 router.post('/', (req, res, next) => {
+    const candidato ={
+        nome: req.body.nome,
+        contato: req.body.contato,
+        email: req.body.email,
+        experiencia: req.body.experiencia,
+        habilidades: req.body.habilidades,
+        escolaridade: req.body.escolaridade,
+        adicionais: req.body.adicionais
+    }
     res.status(200).send({
-        mensagem: 'candidato inserido com sucesso!'
+        candidatoCriado: candidato,
+        mensagem: 'candidato criado com sucesso!'
     });
 });
 
