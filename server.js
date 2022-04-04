@@ -5,7 +5,7 @@ const http = require('http');
 const app = require('./app');
 
 //Variável pra armazenar porta para o Serviço
-const port = process.env.PORT || 4505; //se a variável não estiver sido fornecida vai para o padrão 3000
+const port = process.env.PORT || 4707; //se a variável não estiver sido fornecida vai para o padrão 3000
 
 //Criar o Server e passando o app
 const server = http.createServer(app);

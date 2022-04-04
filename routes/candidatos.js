@@ -13,6 +13,7 @@ router.get('/', (req, res, next) => {
 //INSERE UM CANDIDATO
 router.post('/', (req, res, next) => {
     const candidato ={
+        idvaga: req.body.idvaga,
         nome: req.body.nome,
         contato: req.body.contato,
         email: req.body.email,

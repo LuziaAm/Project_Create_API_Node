@@ -3,6 +3,8 @@ const express = require('express');
 
 const router = express.Router();
 
+const mysql = require('../mysql').pool;
+
 //RETORNA TODAS AS VAGAS
 router.get('/', (req, res, next) => {
     res.status(200).send({
@@ -12,18 +14,28 @@ router.get('/', (req, res, next) => {
 
 //INSERE UMA VAGA
 router.post('/', (req, res, next) => {
-    const vaga = {
-        titulo: req.body.titulo,
-        empresa: req.body.empresa,
-        nivel: req.body.nivel,
-        salario: req.body.salario,
-        descricao: req.body.descricao,
-        modalidade: req.body.modalidade,
-        tags:req.body.tags
-    }
-    res.status(200).send({
-        vagaCriada: vaga,
-        mensagem: 'vaga inserida com sucesso!'       
+
+    mysql.getConnection((error, conn) => {
+        conn.query(
+            'INSERT INTO vagas (titulo, empresa, nivel, salario, descricao, modalidade, tags) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            [req.body.titulo, req.body.empresa, req.body.nivel, req.body.salario, re.body.descricao, req.body.modalidade, req.body.tags],
+
+            (error, resultado, field) => {
+                conn.release(); //nunca esquecer de liberar o pool
+
+                if (error){
+                    res.status(500).send({
+                        error: error,
+                        response: null
+                    });
+                }
+
+                res.status(200).send({
+                    mensagem: 'vaga inserida com sucesso!',
+                    id_vaga: resultado.insertId
+                });
+            }
+        )
     });
 });
 

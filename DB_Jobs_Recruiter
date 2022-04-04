@@ -1,0 +1,62 @@
+-- MySQL Workbench Synchronization
+-- Generated: 2022-04-03 20:01
+-- Model: New Model
+-- Version: 1.0
+-- Project: Name of the project
+-- Author: Luzia Amorim
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+CREATE SCHEMA IF NOT EXISTS `jobrecruiter` DEFAULT CHARACTER SET utf8 ;
+
+CREATE TABLE IF NOT EXISTS `jobrecruiter`.`vagas` (
+  `idvagas` INT(11) NOT NULL AUTO_INCREMENT,
+  `titulo` VARCHAR(45) NOT NULL,
+  `empresa` VARCHAR(45) NOT NULL,
+  `nivel` VARCHAR(45) NOT NULL,
+  `salario` VARCHAR(45) NOT NULL,
+  `descricao` VARCHAR(45) NOT NULL,
+  `modalidade` VARCHAR(45) NOT NULL,
+  `tags` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idvagas`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `jobrecruiter`.`candidato` (
+  `idcandidato` INT(11) NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(45) NOT NULL,
+  `contato` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `experiencia` VARCHAR(45) NOT NULL,
+  `habilidades` VARCHAR(45) NOT NULL,
+  `escolaridade` VARCHAR(45) NOT NULL,
+  `adicionais` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idcandidato`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `jobrecruiter`.`vagas_has_candidato` (
+  `vagas_idvagas` INT(11) NOT NULL,
+  `candidato_idcandidato` INT(11) NOT NULL,
+  PRIMARY KEY (`vagas_idvagas`, `candidato_idcandidato`),
+  INDEX `fk_vagas_has_candidato_candidato1_idx` (`candidato_idcandidato` ASC) VISIBLE,
+  INDEX `fk_vagas_has_candidato_vagas_idx` (`vagas_idvagas` ASC) VISIBLE,
+  CONSTRAINT `fk_vagas_has_candidato_vagas`
+    FOREIGN KEY (`vagas_idvagas`)
+    REFERENCES `jobrecruiter`.`vagas` (`idvagas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_vagas_has_candidato_candidato1`
+    FOREIGN KEY (`candidato_idcandidato`)
+    REFERENCES `jobrecruiter`.`candidato` (`idcandidato`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
